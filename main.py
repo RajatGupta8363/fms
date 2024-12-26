@@ -1,6 +1,4 @@
 import requests
-from dotenv import load_dotenv
-import os
 import json
 import streamlit as st
 
@@ -9,7 +7,6 @@ load_dotenv()
 BASE_API_URL = "https://api.langflow.astra.datastax.com"
 LANGFLOW_ID = "fdcba4c7-5533-492c-9ef1-bb2146f2958e"
 FLOW_ID = "c0f84caf-1c46-45f5-bdfd-f4368b56db9b"
-APPLICATION_TOKEN =os.environ.get("APP_TOKEN")
 ENDPOINT = "FMS" # The endpoint name of the flow
 
 
@@ -22,7 +19,7 @@ def run_flow(message: str) -> dict:
         "output_type": "chat",
         "input_type": "chat",
     }
-    headers = {"Authorization": "Bearer " + APPLICATION_TOKEN, "Content-Type": "application/json"}
+    headers = {"authorization": st.secrets ["auth_token"], "Content-Type": "application/json"}
     response = requests.post(api_url, json=payload, headers=headers)
     return response.json()
 
