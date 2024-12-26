@@ -19,7 +19,7 @@ def run_flow(message: str) -> dict:
         "output_type": "chat",
         "input_type": "chat",
     }
-    headers = {"authorization": st.secrets ["auth_token"], "Content-Type": "application/json"}
+    headers = {"authorization": st.secrets ["auth_key"], "Content-Type": "application/json"}
     response = requests.post(api_url, json=payload, headers=headers)
     return response.json()
 
